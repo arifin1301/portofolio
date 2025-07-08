@@ -50,8 +50,8 @@ nav ul a:hover {
 }
 
 nav ul a.active {
-    color: #121212;
-    background-color: #f3ec78;
+    color: #ffffff;
+    background-color: #3B82F6;
 }
 
 /* --- HEADER STYLING --- */
@@ -80,8 +80,8 @@ nav ul a.active {
     font-size: clamp(1rem, 5vw, 2.5rem);
     font-weight: 400;
     margin: 0;
-    background-color: #f3ec78;
-    color: #121212;
+    background-color: #3B82F6;
+    color: #ffffff;
     padding: 0.5rem 1rem;
     transform: translateY(-10px);
 }
@@ -93,7 +93,7 @@ section {
     scroll-margin-top: 0; 
 }
 
-.about-section, .contact-section {
+.about-section, .contact-section, .skills-section {
     position: relative;         
     z-index: 2;                 
     background-color: #121212;  
@@ -102,7 +102,7 @@ section {
 .about-section .small-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #f3ec78;
+    color: #3B82F6;
     margin-bottom: 1rem;
 }
 
@@ -119,8 +119,56 @@ section {
     text-align: center;
     margin-bottom: 4rem;
     color: #222;
-    -webkit-text-stroke: 1px #f3ec78;
+    -webkit-text-stroke: 1px #3B82F6;
 }
+
+/* --- SKILLS SECTION STYLING --- */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.skill-category {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.skill-category h4 {
+    font-size: 2rem;
+    margin: 0 0 2rem 0;
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 2px solid #3B82F6;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.skill-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.skill-category li {
+    font-size: 1.1rem;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 
 /* --- PROJECT SECTION STYLING --- */
 .projects-section {
@@ -164,7 +212,7 @@ section {
 
 .project-item a {
     font-weight: 700;
-    color: #f3ec78;
+    color: #3B82F6;
     text-decoration: none;
 }
 
@@ -227,12 +275,13 @@ section {
     padding: 1.5rem 4rem;
     text-decoration: none;
     border-radius: 50px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .contact-button:hover {
+    background-color: #3B82F6;
+    color: #ffffff;
     transform: scale(1.1);
-    background-color: #f3ec78;
 }
 
 /* --- SCROLL DOWN INDICATOR --- */
@@ -275,8 +324,8 @@ section {
     left: 0;
     width: 100%; 
     overflow: hidden; 
-    background-color: #f3ec78;
-    color: #121212;
+    background-color: #3B82F6;
+    color: #ffffff;
     padding: 0.75rem 0;
     z-index: 999;
 }
@@ -295,7 +344,7 @@ section {
 
 @keyframes tick {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-33.3333%); }
+    100% { transform: translateX(-50%); }
 }
 
 /* --- CUSTOM CURSOR --- */
@@ -309,7 +358,7 @@ section {
     left: -10px;
     width: 22px;
     height: 22px;
-    border: 2px solid #f3ec78;
+    border: 2px solid #3B82F6;
     pointer-events: none;
     z-index: 9999;
     transition: width 0.2s ease, height 0.2s ease;
@@ -318,4 +367,12 @@ section {
 .custom-cursor.grow {
     width: 44px;
     height: 44px;
+}
+
+/* --- Tipografi Kustom untuk Judul Section --- */
+#projects .section-title, #contact .section-title {
+    -webkit-text-stroke: 0; 
+    background: linear-gradient(45deg, #3B82F6, #A78BFA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
