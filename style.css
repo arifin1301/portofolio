@@ -1,0 +1,141 @@
+/* Reset & Basic Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #121212;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- EXAGGERATED HIERARCHY --- */
+
+/* Header Utama: Sangat Besar & Dominan */
+.main-header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.main-header h1 {
+    font-size: clamp(4rem, 20vw, 15rem); /* Ukuran font responsif yang sangat besar */
+    font-weight: 900; /* Super tebal */
+    margin: 0;
+    line-height: 0.9;
+    color: #f0f0f0;
+    letter-spacing: -5px;
+}
+
+.main-header h2 {
+    font-size: clamp(1rem, 5vw, 2.5rem);
+    font-weight: 400;
+    margin: 0;
+    background-color: #f3ec78;
+    color: #121212;
+    padding: 0.5rem 1rem;
+    transform: translateY(-10px); /* Sedikit tumpang tindih */
+}
+
+/* Section Styling */
+section {
+    padding: 6rem 0;
+    border-top: 1px solid #333;
+}
+
+/* About Section: Teks Besar sebagai Fokus */
+.about-section .small-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f3ec78;
+    margin-bottom: 1rem;
+}
+
+.about-section .large-text {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* Projects Section: Kartu yang Menonjol */
+.section-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: #222; /* Warna gelap agar kontras dengan latar belakang terang */
+    -webkit-text-stroke: 1px #f3ec78; /* Outline effect */
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: #1f1f1f;
+    padding: 2rem;
+    border: 1px solid #333;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    background-color: #f3ec78;
+    color: #121212;
+}
+
+.project-card h4 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+}
+
+.project-card p {
+    font-size: 1rem;
+    margin: 0 0 2rem 0;
+}
+
+.project-card a {
+    font-weight: 700;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Contact Section: Tombol Aksi yang Mencolok */
+.contact-section {
+    text-align: center;
+}
+
+.contact-section .contact-text {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin: 0 0 2rem 0;
+}
+
+.contact-button {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #121212;
+    background-color: #ffffff;
+    padding: 1.5rem 4rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: transform 0.3s ease;
+}
+
+.contact-button:hover {
+    transform: scale(1.1);
+    background-color: #f3ec78;
+}
