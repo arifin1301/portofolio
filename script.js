@@ -28,5 +28,23 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
+    
+    // Smooth scroll untuk link indikator
+    const scrollLink = document.querySelector('.scroll-down-indicator');
 
+    if (scrollLink) {
+        scrollLink.addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah lompatan instan
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth', // Efek scroll halus
+                    block: 'start'
+                });
+            }
+        });
+    }
 });
