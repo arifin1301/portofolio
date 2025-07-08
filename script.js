@@ -9,42 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- ANIMASI KARTU PROYEK ---
-    const projectCards = document.querySelectorAll('.project-card');
-    const projectObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                projectObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    projectCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        projectObserver.observe(card);
-    });
-    
-    // --- LOGIKA SMOOTH SCROLL ---
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-        if (link.getAttribute('href') === '#') return;
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
     // --- LOGIKA KURSOR KUSTOM (BENTUK KETUPAT) ---
     const cursor = document.querySelector('.custom-cursor');
     const interactiveElements = document.querySelectorAll('a, button');
@@ -61,25 +25,73 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.classList.remove('grow');
         });
     });
-    
-    // --- LOGIKA BARU UNTUK NAVIGASI AKTIF ---
-    const sections = document.querySelectorAll('section, header');
-    const navLinks = document.querySelectorAll('nav a');
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === entry.target.id) {
-                        link.classList.add('active');
+    // --- LOGIKA PROJECT SECTION INTERAKTIF ---
+    const projectItems = document.querySelectorAll('.project-item');
+    const projectImages = document.querySelectorAll('.preview-img');
+
+    if (projectItems.length > 0 && projectImages.length > 0) {
+        const projectObserverOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const projectObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    projectImages.forEach(img => img.classList.remove('active'));
+                    const imageId = entry.target.getAttribute('data-image');
+                    const imageToShow = document.getElementById(`img-${imageId}`);
+                    if (imageToShow) {
+                        imageToShow.classList.add('active');
                     }
+                }
+            });
+        }, projectObserverOptions);
+
+        projectItems.forEach(item => {
+            projectObserver.observe(item);
+        });
+    }
+
+    // --- LOGIKA SMOOTH SCROLL ---
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        if (link.getAttribute('href') === '#') return;
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
-    }, { threshold: 0.5 }); // Anggap aktif jika 50% section terlihat
-
-    sections.forEach(section => {
-        sectionObserver.observe(section);
     });
+    
+    // --- LOGIKA NAVIGASI AKTIF ---
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('nav a');
+
+    if (sections.length > 0 && navLinks.length > 0) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+    }
 });

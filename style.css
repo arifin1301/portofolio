@@ -13,12 +13,12 @@ body {
     padding: 0 2rem;
 }
 
-/* --- GAYA NAVBAR FLOATING PILL BARU --- */
+/* --- NAVBAR FLOATING PILL --- */
 nav {
     position: fixed;
-    top: 2rem; /* Jarak dari atas */
+    top: 2rem;
     left: 50%;
-    transform: translateX(-50%); /* Trik untuk menengahkan */
+    transform: translateX(-50%);
     z-index: 1000;
 }
 
@@ -31,7 +31,7 @@ nav ul {
     background-color: rgba(30, 30, 30, 0.7);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px; /* Bentuk pil */
+    border-radius: 50px;
 }
 
 nav ul a {
@@ -49,15 +49,9 @@ nav ul a:hover {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
-/* Gaya untuk link yang aktif */
 nav ul a.active {
     color: #121212;
     background-color: #f3ec78;
-}
-
-/* --- KONTEN UTAMA (margin-left dihapus) --- */
-.main-header, main {
-    margin-left: 0; 
 }
 
 /* --- HEADER STYLING --- */
@@ -96,15 +90,10 @@ nav ul a.active {
 section {
     padding: 6rem 0;
     border-top: 1px solid #333;
-    /* Reset scroll-margin-top */
     scroll-margin-top: 0; 
 }
 
-#home {
-    scroll-margin-top: 0;
-}
-
-.about-section {
+.about-section, .contact-section {
     position: relative;         
     z-index: 2;                 
     background-color: #121212;  
@@ -124,12 +113,6 @@ section {
     margin: 0;
 }
 
-.projects-section {
-    background-color: #121212;
-    position: relative;
-    z-index: 2;
-}
-
 .section-title {
     font-size: clamp(3rem, 10vw, 8rem);
     font-weight: 900;
@@ -139,47 +122,94 @@ section {
     -webkit-text-stroke: 1px #f3ec78;
 }
 
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background-color: #1f1f1f;
-    padding: 2rem;
-    border: 1px solid #333;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    background-color: #f3ec78;
-    color: #121212;
-}
-
-.project-card h4 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-}
-
-.project-card p {
-    font-size: 1rem;
-    margin: 0 0 2rem 0;
-}
-
-.project-card a {
-    font-weight: 700;
-    color: inherit;
-    text-decoration: none;
-}
-
-.contact-section {
-    text-align: center;
+/* --- PROJECT SECTION STYLING --- */
+.projects-section {
     background-color: #121212;
     position: relative;
     z-index: 2;
+}
+
+.project-layout {
+    display: flex;
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+.project-list {
+    flex: 1;
+}
+
+.project-item {
+    padding: 3rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.project-item:first-child {
+    padding-top: 0;
+}
+
+.project-item h4 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: #eee;
+}
+
+.project-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #999;
+}
+
+.project-item a {
+    font-weight: 700;
+    color: #f3ec78;
+    text-decoration: none;
+}
+
+.project-preview {
+    flex: 1;
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .project-preview {
+        display: block;
+    }
+}
+
+.preview-sticky-container {
+    position: sticky;
+    top: 120px;
+    height: 400px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.preview-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.preview-img.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* --- CONTACT SECTION --- */
+.contact-section {
+    text-align: center;
 }
 
 .contact-section .contact-text {
@@ -208,7 +238,7 @@ section {
 /* --- SCROLL DOWN INDICATOR --- */
 .scroll-down-indicator {
     position: absolute;
-    bottom: 140px; 
+    bottom: 40px; 
     left: 50%;
     transform: translateX(-50%);
     width: 24px;
@@ -244,7 +274,6 @@ section {
     bottom: 0;
     left: 0;
     width: 100%; 
-    margin-left: 0; /* Reset margin */
     overflow: hidden; 
     background-color: #f3ec78;
     color: #121212;
