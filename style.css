@@ -15,7 +15,7 @@ body {
 
 /* --- EXAGGERATED HIERARCHY --- */
 
-/* Header Utama: Sangat Besar & Dominan */
+/* Header Utama: Z-index lebih rendah */
 .main-header {
     height: 100vh;
     display: flex;
@@ -24,11 +24,14 @@ body {
     align-items: center;
     text-align: center;
     padding: 1rem;
+    /* --- PERUBAHAN DI SINI --- */
+    position: relative; /* Diperlukan agar z-index berfungsi */
+    z-index: 1;         /* Lapisan bawah */
 }
 
 .main-header h1 {
-    font-size: clamp(4rem, 20vw, 15rem); /* Ukuran font responsif yang sangat besar */
-    font-weight: 900; /* Super tebal */
+    font-size: clamp(4rem, 20vw, 15rem);
+    font-weight: 900;
     margin: 0;
     line-height: 0.9;
     color: #f0f0f0;
@@ -42,7 +45,7 @@ body {
     background-color: #f3ec78;
     color: #121212;
     padding: 0.5rem 1rem;
-    transform: translateY(-10px); /* Sedikit tumpang tindih */
+    transform: translateY(-10px);
 }
 
 /* Section Styling */
@@ -51,7 +54,15 @@ section {
     border-top: 1px solid #333;
 }
 
-/* About Section: Teks Besar sebagai Fokus */
+/* --- PERUBAHAN DI SINI --- */
+/* About Section: Z-index lebih tinggi */
+.about-section {
+    position: relative;         /* Diperlukan agar z-index berfungsi */
+    z-index: 2;                 /* Lapisan atas */
+    background-color: #121212;  /* Pastikan ada background agar tidak transparan */
+}
+
+
 .about-section .small-title {
     font-size: 1rem;
     font-weight: 700;
@@ -72,8 +83,8 @@ section {
     font-weight: 900;
     text-align: center;
     margin-bottom: 4rem;
-    color: #222; /* Warna gelap agar kontras dengan latar belakang terang */
-    -webkit-text-stroke: 1px #f3ec78; /* Outline effect */
+    color: #222;
+    -webkit-text-stroke: 1px #f3ec78;
 }
 
 .project-grid {
