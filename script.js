@@ -1,50 +1,85 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Efek paralaks sederhana pada header saat scroll
+    // --- EFEK PARALAKS HEADER ---
     const header = document.querySelector('.main-header');
     window.addEventListener('scroll', () => {
         let scrollPosition = window.scrollY;
-        header.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+        if (scrollPosition < window.innerHeight) {
+            header.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+        }
     });
 
-    // Animasi sederhana untuk kartu proyek saat muncul di layar
+    // --- ANIMASI KARTU PROYEK ---
     const projectCards = document.querySelectorAll('.project-card');
-
-    const observer = new IntersectionObserver((entries) => {
+    const projectObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
+                projectObserver.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
     projectCards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(50px)';
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
+        projectObserver.observe(card);
     });
     
-    // Smooth scroll untuk link indikator
-    const scrollLink = document.querySelector('.scroll-down-indicator');
-
-    if (scrollLink) {
-        scrollLink.addEventListener('click', function(e) {
-            e.preventDefault(); // Mencegah lompatan instan
-            
+    // --- LOGIKA SMOOTH SCROLL ---
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+        if (link.getAttribute('href') === '#') return;
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-
             if (targetElement) {
                 targetElement.scrollIntoView({
-                    behavior: 'smooth', // Efek scroll halus
+                    behavior: 'smooth',
                     block: 'start'
                 });
             }
         });
-    }
+    });
+
+    // --- LOGIKA KURSOR KUSTOM (BENTUK KETUPAT) ---
+    const cursor = document.querySelector('.custom-cursor');
+    const interactiveElements = document.querySelectorAll('a, button');
+
+    window.addEventListener('mousemove', e => {
+        cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0) rotate(45deg)`;
+    });
+
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('grow');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('grow');
+        });
+    });
+    
+    // --- LOGIKA BARU UNTUK NAVIGASI AKTIF ---
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, { threshold: 0.5 }); // Anggap aktif jika 50% section terlihat
+
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
 });

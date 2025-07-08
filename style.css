@@ -13,9 +13,54 @@ body {
     padding: 0 2rem;
 }
 
-/* --- EXAGGERATED HIERARCHY --- */
+/* --- GAYA NAVBAR FLOATING PILL BARU --- */
+nav {
+    position: fixed;
+    top: 2rem; /* Jarak dari atas */
+    left: 50%;
+    transform: translateX(-50%); /* Trik untuk menengahkan */
+    z-index: 1000;
+}
 
-/* Header Utama: Z-index lebih rendah */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    background-color: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px; /* Bentuk pil */
+}
+
+nav ul a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+nav ul a:hover {
+    color: #121212;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Gaya untuk link yang aktif */
+nav ul a.active {
+    color: #121212;
+    background-color: #f3ec78;
+}
+
+/* --- KONTEN UTAMA (margin-left dihapus) --- */
+.main-header, main {
+    margin-left: 0; 
+}
+
+/* --- HEADER STYLING --- */
 .main-header {
     height: 100vh;
     display: flex;
@@ -24,8 +69,8 @@ body {
     align-items: center;
     text-align: center;
     padding: 1rem;
-    position: relative; /* Diperlukan agar z-index berfungsi */
-    z-index: 1;         /* Lapisan bawah */
+    position: relative; 
+    z-index: 1;         
 }
 
 .main-header h1 {
@@ -47,17 +92,22 @@ body {
     transform: translateY(-10px);
 }
 
-/* Section Styling */
+/* --- SECTION STYLING --- */
 section {
     padding: 6rem 0;
     border-top: 1px solid #333;
+    /* Reset scroll-margin-top */
+    scroll-margin-top: 0; 
 }
 
-/* About Section: Z-index lebih tinggi */
+#home {
+    scroll-margin-top: 0;
+}
+
 .about-section {
-    position: relative;         /* Diperlukan agar z-index berfungsi */
-    z-index: 2;                 /* Lapisan atas */
-    background-color: #121212;  /* Pastikan ada background agar tidak transparan */
+    position: relative;         
+    z-index: 2;                 
+    background-color: #121212;  
 }
 
 .about-section .small-title {
@@ -74,7 +124,6 @@ section {
     margin: 0;
 }
 
-/* Projects Section: Kartu yang Menonjol */
 .projects-section {
     background-color: #121212;
     position: relative;
@@ -126,7 +175,6 @@ section {
     text-decoration: none;
 }
 
-/* Contact Section: Tombol Aksi yang Mencolok */
 .contact-section {
     text-align: center;
     background-color: #121212;
@@ -157,18 +205,16 @@ section {
     background-color: #f3ec78;
 }
 
-/* --- Animasi Scroll Down Indicator --- */
+/* --- SCROLL DOWN INDICATOR --- */
 .scroll-down-indicator {
     position: absolute;
-    bottom: 40px; /* Jarak dari bawah header */
+    bottom: 140px; 
     left: 50%;
     transform: translateX(-50%);
     width: 24px;
     height: 24px;
-    cursor: pointer;
 }
 
-/* Membuat bentuk panah (chevron) menggunakan border */
 .scroll-down-indicator::before {
     content: '';
     position: absolute;
@@ -177,12 +223,9 @@ section {
     border-left: 3px solid #ffffff;
     border-bottom: 3px solid #ffffff;
     transform: rotate(-45deg);
-    
-    /* Menambahkan animasi */
     animation: bounce 2s infinite;
 }
 
-/* Keyframes untuk animasi memantul (bounce) */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0) rotate(-45deg);
@@ -193,4 +236,57 @@ section {
     60% {
         transform: translateY(7px) rotate(-45deg);
     }
+}
+
+/* --- TICKER TEXT --- */
+.ticker-wrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%; 
+    margin-left: 0; /* Reset margin */
+    overflow: hidden; 
+    background-color: #f3ec78;
+    color: #121212;
+    padding: 0.75rem 0;
+    z-index: 999;
+}
+
+.ticker {
+    display: inline-block;
+    white-space: nowrap; 
+    animation: tick 45s linear infinite; 
+}
+
+.ticker span {
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding-right: 2rem;
+}
+
+@keyframes tick {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.3333%); }
+}
+
+/* --- CUSTOM CURSOR --- */
+* {
+    cursor: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    top: -10px; 
+    left: -10px;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #f3ec78;
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+.custom-cursor.grow {
+    width: 44px;
+    height: 44px;
 }
