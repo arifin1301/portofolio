@@ -1,120 +1,1051 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dion Arifin - Web Developer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dion Arifin | Creative Developer</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f5f5f5;
+            --text: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #ff4d4d;
+            --border: #e0e0e0;
+            --card-bg: #ffffff;
+            --transition: cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            cursor: none;
+        }
+
+        /* ========== CUSTOM CURSOR ========== */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--text);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid var(--text);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid var(--text);
+            mix-blend-mode: normal;
+        }
+
+        .cursor-follower.hover {
+            width: 60px;
+            height: 60px;
+            border-color: var(--accent);
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.3s var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 1.5px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 3rem;
+            position: relative;
+            background: var(--bg);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero-title .highlight {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 500px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: var(--text);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s var(--transition);
+        }
+
+        .hero-cta:hover::before {
+            transform: scaleX(1);
+        }
+
+        .hero-cta span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-cta i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            right: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: var(--text);
+            animation: scrollLine 2s ease infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+        }
+
+        /* ========== PROJECTS SECTION ========== */
+        .section {
+            padding: 6rem 3rem;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .project-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border);
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.4s var(--transition);
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .project-item:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-item:hover {
+            padding-left: 2rem;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .project-number {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .project-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-info .project-url {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+            word-break: break-all;
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .project-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            background: var(--text);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .project-arrow {
+            justify-self: end;
+            font-size: 1.5rem;
+            transition: transform 0.3s var(--transition);
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .project-item:hover .project-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .project-preview {
+            position: fixed;
+            width: 450px;
+            height: 300px;
+            pointer-events: none;
+            z-index: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .project-preview.visible {
+            opacity: 1;
+        }
+
+        .project-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+        }
+
+        .project-preview .preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            z-index: 1;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-text .highlight-text {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .services-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .service-item {
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .service-item:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .service-item h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .service-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ========== SKILLS MARQUEE ========== */
+        .marquee-section {
+            padding: 4rem 0;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .marquee {
+            display: flex;
+            gap: 3rem;
+            animation: marquee 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        .marquee span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .marquee span:hover {
+            color: var(--text);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact-section {
+            text-align: center;
+            padding: 8rem 3rem;
+        }
+
+        .contact-email {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .contact-email::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--text);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--transition);
+        }
+
+        .contact-email:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-links a:hover {
+            color: var(--text);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 0 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+                letter-spacing: -1px;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .project-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                padding: 1.5rem 0;
+            }
+
+            .project-number {
+                display: none;
+            }
+
+            .project-arrow {
+                display: none;
+            }
+
+            .project-info h3 {
+                font-size: 1.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-preview {
+                width: 250px;
+                height: 180px;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">Tentang</a></li>
-            <li><a href="#skills">Skill</a></li>
-            <li><a href="#projects">Proyek</a></li>
-            <li><a href="#contact">Kontak</a></li>
+    <!-- Project Preview -->
+    <div class="project-preview" id="projectPreview">
+        <iframe src="" id="previewFrame" sandbox="allow-scripts allow-same-origin"></iframe>
+        <div class="preview-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">DION</a>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
 
-    <header id="home" class="main-header">
-        <h1>DION<br>ARIFIN</h1>
-        <h2>WEB DEVELOPER</h2>
-        <a href="#about" class="scroll-down-indicator" aria-label="Scroll ke bawah"></a>
-    </header>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="hero-label">Dion Arifin — Creative Developer</p>
+            <h1 class="hero-title">
+                Design.<br>
+                <span class="highlight">Develop.</span><br>
+                Analyze.
+            </h1>
+            <p class="hero-subtitle">
+                I craft digital experiences at the intersection of design, development, and data.
+            </p>
+            <a href="#work" class="hero-cta">
+                <span>View My Work</span>
+                <i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-    <main>
-        <section id="about" class="about-section">
-            <div class="container">
-                <p class="small-title">TENTANG SAYA</p>
-                <p class="large-text">
-                    Saya adalah seorang developer kreatif dengan hasrat untuk membangun aplikasi web yang modern dan intuitif, baik di sisi frontend maupun backend.
-                </p>
-            </div>
-        </section>
-
-        <section id="skills" class="skills-section">
-            <div class="container">
-                <h3 class="section-title">SKILL</h3>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h4><i class="fa-solid fa-code"></i> Frontend</h4>
-                        <ul>
-                            <li><i class="fa-brands fa-html5"></i> HTML</li>
-                            <li><i class="fa-brands fa-css3-alt"></i> CSS</li>
-                            <li><i class="fa-brands fa-js"></i> JavaScript</li>
-                            <li><i class="fa-brands fa-react"></i> React</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4><i class="fa-solid fa-server"></i> Backend</h4>
-                        <ul>
-                            <li><i class="fa-brands fa-laravel"></i> Laravel</li>
-                            <li><i class="fa-solid fa-feather-pointed"></i> NestJS</li>
-                            <li><i class="fa-brands fa-node-js"></i> ExpressJS</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="projects-section">
-            <div class="container">
-                <h3 class="section-title">PROYEK</h3>
-                <div class="project-layout">
-                    <div class="project-list">
-                        <div class="project-item" data-image="proyek1">
-                            <h4>Aplikasi E-Commerce</h4>
-                            <p>Platform e-commerce modern yang dibangun dengan React dan Node.js, menampilkan manajemen produk dan proses checkout yang mulus.</p>
-                            <a href="#">Lihat Detail &rarr;</a>
-                        </div>
-                        <div class="project-item" data-image="proyek2">
-                            <h4>Dashboard Analitik</h4>
-                            <p>Dashboard interaktif untuk visualisasi data menggunakan D3.js dan CSS Grid, memberikan wawasan bisnis yang kuat.</p>
-                            <a href="#">Lihat Detail &rarr;</a>
-                        </div>
-                        <div class="project-item" data-image="proyek3">
-                            <h4>Situs Portofolio Pribadi</h4>
-                            <p>Desain dan pengembangan situs portofolio yang dinamis dengan fokus pada animasi dan pengalaman pengguna yang unik.</p>
-                            <a href="#">Lihat Detail &rarr;</a>
-                        </div>
-                    </div>
-
-                    <div class="project-preview">
-                        <div class="preview-sticky-container">
-                            <img src="https://picsum.photos/600/400?random=1" id="img-proyek1" class="preview-img active" alt="Pratinjau Proyek 1">
-                            <img src="https://picsum.photos/600/400?random=2" id="img-proyek2" class="preview-img" alt="Pratinjau Proyek 2">
-                            <img src="https://picsum.photos/600/400?random=3" id="img-proyek3" class="preview-img" alt="Pratinjau Proyek 3">
-                        </div>
+    <!-- Projects Section -->
+    <section class="section" id="work">
+        <div class="section-header">
+            <p class="section-label">Selected Work</p>
+            <h2 class="section-title">Recent Projects</h2>
+        </div>
+        <div class="projects-list">
+            <!-- Project 1: Nails by DNNA -->
+            <a href="https://nailsbydnna.vercel.app/" target="_blank" class="project-item" data-preview="https://nailsbydnna.vercel.app/">
+                <span class="project-number">01</span>
+                <div class="project-info">
+                    <h3>Nails by DNNA</h3>
+                    <p class="project-url">nailsbydnna.vercel.app</p>
+                    <p>Beauty & Nail Art Booking Platform</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Web Design</span>
+                        <span class="project-tag">Booking System</span>
+                        <span class="project-tag">E-Commerce</span>
                     </div>
                 </div>
-            </div>
-        </section>
+                <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
 
-        <section id="contact" class="contact-section">
-            <div class="container">
-                 <h3 class="section-title">KONTAK</h3>
-                <p class="contact-text">Tertarik bekerja sama?</p>
-                <a href="mailto:email@dionarifin.com" class="contact-button">Kirim Email</a>
-            </div>
-        </section>
-    </main>
+            <!-- Project 2: KNN Financial Planner -->
+            <a href="https://knn-financial-planner-357378520513.us-west1.run.app/" target="_blank" class="project-item" data-preview="https://knn-financial-planner-357378520513.us-west1.run.app/">
+                <span class="project-number">02</span>
+                <div class="project-info">
+                    <h3>KNN Financial Planner</h3>
+                    <p class="project-url">knn-financial-planner.run.app</p>
+                    <p>AI-Powered Financial Planning & Analytics Tool</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Machine Learning</span>
+                        <span class="project-tag">Data Analysis</span>
+                        <span class="project-tag">FinTech</span>
+                    </div>
+                </div>
+                <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
 
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <span>HTML &bull; CSS &bull; JavaScript &bull; React &bull; Node.js &bull; PHP &bull; Web Design &bull; Laravel &bull; NestJS &bull; ExpressJS &bull;</span>
-            <span>HTML &bull; CSS &bull; JavaScript &bull; React &bull; Node.js &bull; PHP &bull; Web Design &bull; Laravel &bull; NestJS &bull; ExpressJS &bull;</span>
+            <!-- Project 3: DompetKu -->
+            <a href="https://dompet-ku-lake.vercel.app/" target="_blank" class="project-item" data-preview="https://dompet-ku-lake.vercel.app/">
+                <span class="project-number">03</span>
+                <div class="project-info">
+                    <h3>DompetKu</h3>
+                    <p class="project-url">dompet-ku-lake.vercel.app</p>
+                    <p>Personal Finance Management Dashboard</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Web App</span>
+                        <span class="project-tag">Dashboard</span>
+                        <span class="project-tag">Finance</span>
+                    </div>
+                </div>
+                <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Marquee Skills -->
+    <div class="marquee-section">
+        <div class="marquee">
+            <span>Web Design</span>
+            <span>•</span>
+            <span>Web Development</span>
+            <span>•</span>
+            <span>Data Analysis</span>
+            <span>•</span>
+            <span>UI/UX</span>
+            <span>•</span>
+            <span>React</span>
+            <span>•</span>
+            <span>Python</span>
+            <span>•</span>
+            <span>Figma</span>
+            <span>•</span>
+            <span>Machine Learning</span>
+            <span>•</span>
+            <span>SQL</span>
+            <span>•</span>
+            <span>GSAP</span>
+            <span>•</span>
+            <span>Tableau</span>
+            <span>•</span>
+            <span>Power BI</span>
+            <!-- Duplicate for seamless loop -->
+            <span>Web Design</span>
+            <span>•</span>
+            <span>Web Development</span>
+            <span>•</span>
+            <span>Data Analysis</span>
+            <span>•</span>
+            <span>UI/UX</span>
+            <span>•</span>
+            <span>React</span>
+            <span>•</span>
+            <span>Python</span>
+            <span>•</span>
+            <span>Figma</span>
+            <span>•</span>
+            <span>Machine Learning</span>
+            <span>•</span>
+            <span>SQL</span>
+            <span>•</span>
+            <span>GSAP</span>
+            <span>•</span>
+            <span>Tableau</span>
+            <span>•</span>
+            <span>Power BI</span>
         </div>
     </div>
 
-    <div class="custom-cursor"></div>
-    
-    <script src="script.js"></script>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <p class="section-label">About Me</p>
+            <h2 class="section-title">Who I Am</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    I'm <span class="highlight-text">Dion Arifin</span>, a multidisciplinary creative developer based in Indonesia. With expertise spanning web design, development, and data analysis, I build digital solutions that are both beautiful and functional.
+                </p>
+                <p>
+                    My recent projects include <span class="highlight-text">Nails by DNNA</span> (a beauty booking platform), <span class="highlight-text">KNN Financial Planner</span> (an AI-powered financial tool), and <span class="highlight-text">DompetKu</span> (a personal finance dashboard).
+                </p>
+                <p>
+                    I believe in creating work that not only looks great but drives real results through data-driven insights and user-centered design.
+                </p>
+            </div>
+            <div class="services-list">
+                <div class="service-item">
+                    <h4>Web Design</h4>
+                    <p>Creating visually stunning and intuitive user interfaces that captivate and engage users.</p>
+                </div>
+                <div class="service-item">
+                    <h4>Web Development</h4>
+                    <p>Building fast, responsive, and scalable web applications with modern technologies.</p>
+                </div>
+                <div class="service-item">
+                    <h4>Data Analysis</h4>
+                    <p>Transforming complex data into actionable insights and beautiful visualizations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <p class="section-label">Get In Touch</p>
+        <h2 class="section-title" style="margin-bottom: 3rem;">Let's Work Together</h2>
+        <a href="mailto:juniordion7@gmail.com" class="contact-email">juniordion7@gmail.com</a>
+        <div class="social-links">
+            <a href="https://github.com/arifin1301">GitHub</a>
+            <a href="https://www.linkedin.com/in/dionarifin13012003/">LinkedIn</a>
+            <a href="#">Dribbble</a>
+            <a href="#">Twitter</a>
+            <a href="https://www.instagram.com/arifindion__">Instagram</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span>© 2026 Dion Arifin</span>
+        <span>All rights reserved.</span>
+    </footer>
+
+    <script>
+        // ========== CUSTOM CURSOR ==========
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursorFollower');
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        let followerX = 0;
+        let followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.8;
+            cursorY += (mouseY - cursorY) * 0.8;
+            
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+            
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+
+        animateCursor();
+
+        // Hover effects
+        const hoverElements = document.querySelectorAll('a, button, .project-item, .service-item');
+        
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
+        });
+
+        // ========== PROJECT PREVIEW ==========
+        const projectPreview = document.getElementById('projectPreview');
+        const previewFrame = document.getElementById('previewFrame');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        projectItems.forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                const previewUrl = item.getAttribute('data-preview');
+                if (previewUrl) {
+                    previewFrame.src = previewUrl;
+                    projectPreview.classList.add('visible');
+                }
+            });
+
+            item.addEventListener('mousemove', (e) => {
+                const x = e.clientX + 30;
+                const y = e.clientY - 150;
+                
+                const previewWidth = 450;
+                const previewHeight = 300;
+                
+                let posX = x;
+                let posY = y;
+                
+                if (x + previewWidth > window.innerWidth) {
+                    posX = x - previewWidth - 60;
+                }
+                
+                if (y + previewHeight > window.innerHeight) {
+                    posY = window.innerHeight - previewHeight - 20;
+                }
+                
+                if (y < 0) {
+                    posY = 20;
+                }
+                
+                projectPreview.style.left = posX + 'px';
+                projectPreview.style.top = posY + 'px';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                projectPreview.classList.remove('visible');
+                // Don't clear src immediately to allow smooth transition
+                setTimeout(() => {
+                    if (!projectPreview.classList.contains('visible')) {
+                        previewFrame.src = '';
+                    }
+                }, 300);
+            });
+        });
+
+        // ========== MOBILE MENU ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        let menuOpen = false;
+
+        menuToggle.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                navLinks.style.display = 'flex';
+                navLinks.style.position = 'fixed';
+                navLinks.style.inset = '0';
+                navLinks.style.background = 'var(--bg)';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.justifyContent = 'center';
+                navLinks.style.alignItems = 'center';
+                navLinks.style.gap = '2rem';
+                navLinks.style.zIndex = '1000';
+                
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.style.color = 'var(--text)';
+                    link.style.fontSize = '1.5rem';
+                });
+                
+                menuToggle.querySelectorAll('span').forEach((span, i) => {
+                    if (i === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    if (i === 1) span.style.opacity = '0';
+                    if (i === 2) span.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                });
+            } else {
+                navLinks.style.display = '';
+                navLinks.style.position = '';
+                navLinks.style.inset = '';
+                navLinks.style.background = '';
+                navLinks.style.flexDirection = '';
+                navLinks.style.justifyContent = '';
+                navLinks.style.alignItems = '';
+                navLinks.style.gap = '';
+                
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.style.color = '';
+                    link.style.fontSize = '';
+                });
+                
+                menuToggle.querySelectorAll('span').forEach(span => {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                });
+            }
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (menuOpen) {
+                    menuToggle.click();
+                }
+            });
+        });
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ========== SCROLL ANIMATIONS ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-item, .service-item, .about-text p').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
+            observer.observe(el);
+            
+            // Trigger immediately if already visible
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 200);
+            }
+        });
+    </script>
 </body>
 </html>
