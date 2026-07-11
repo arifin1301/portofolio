@@ -302,6 +302,12 @@
             line-height: 1.1;
         }
 
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
         .projects-list {
             display: flex;
             flex-direction: column;
@@ -450,6 +456,7 @@
         .service-item {
             padding: 1.5rem 0;
             border-top: 1px solid var(--border);
+            cursor: default;
         }
 
         .service-item:last-child {
@@ -489,6 +496,7 @@
             letter-spacing: -0.5px;
             color: var(--text-secondary);
             transition: color 0.3s ease;
+            cursor: default;
         }
 
         .marquee span:hover {
@@ -530,9 +538,14 @@
             transition: transform 0.4s var(--transition);
         }
 
+        .contact-email:hover {
+            color: var(--accent);
+        }
+
         .contact-email:hover::after {
             transform: scaleX(1);
             transform-origin: left;
+            background: var(--accent);
         }
 
         .social-links {
@@ -540,6 +553,7 @@
             justify-content: center;
             gap: 2rem;
             margin-top: 3rem;
+            flex-wrap: wrap;
         }
 
         .social-links a {
@@ -629,6 +643,10 @@
             body {
                 cursor: auto;
             }
+            
+            .contact-email {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -686,11 +704,29 @@
         <div class="section-header">
             <p class="section-label">Selected Work</p>
             <h2 class="section-title">Recent Projects</h2>
+            <p class="section-subtitle">Click to visit live project • Hover to preview</p>
         </div>
         <div class="projects-list">
-            <!-- Project 1: Nails by DNNA -->
-            <a href="https://nailsbydnna.vercel.app/" target="_blank" class="project-item" data-preview="https://nailsbydnna.vercel.app/">
+            <!-- Project 1: SinikitAanuin Agency (NEW) -->
+            <a href="https://sinikitaanuin-agency.vercel.app/" target="_blank" class="project-item" data-preview="https://sinikitaanuin-agency.vercel.app/">
                 <span class="project-number">01</span>
+                <div class="project-info">
+                    <h3>SinikitAanuin Agency</h3>
+                    <p class="project-url">sinikitaanuin-agency.vercel.app</p>
+                    <p>Creative Digital Agency Portfolio Platform</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Agency</span>
+                        <span class="project-tag">Web Design</span>
+                        <span class="project-tag">Portfolio</span>
+                        <span class="project-tag">Branding</span>
+                    </div>
+                </div>
+                <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
+            </a>
+
+            <!-- Project 2: Nails by DNNA -->
+            <a href="https://nailsbydnna.vercel.app/" target="_blank" class="project-item" data-preview="https://nailsbydnna.vercel.app/">
+                <span class="project-number">02</span>
                 <div class="project-info">
                     <h3>Nails by DNNA</h3>
                     <p class="project-url">nailsbydnna.vercel.app</p>
@@ -704,9 +740,9 @@
                 <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
             </a>
 
-            <!-- Project 2: KNN Financial Planner -->
+            <!-- Project 3: KNN Financial Planner -->
             <a href="https://knn-financial-planner-357378520513.us-west1.run.app/" target="_blank" class="project-item" data-preview="https://knn-financial-planner-357378520513.us-west1.run.app/">
-                <span class="project-number">02</span>
+                <span class="project-number">03</span>
                 <div class="project-info">
                     <h3>KNN Financial Planner</h3>
                     <p class="project-url">knn-financial-planner.run.app</p>
@@ -720,9 +756,9 @@
                 <span class="project-arrow"><i class="fas fa-arrow-right"></i></span>
             </a>
 
-            <!-- Project 3: DompetKu -->
+            <!-- Project 4: DompetKu -->
             <a href="https://dompet-ku-lake.vercel.app/" target="_blank" class="project-item" data-preview="https://dompet-ku-lake.vercel.app/">
-                <span class="project-number">03</span>
+                <span class="project-number">04</span>
                 <div class="project-info">
                     <h3>DompetKu</h3>
                     <p class="project-url">dompet-ku-lake.vercel.app</p>
@@ -764,6 +800,10 @@
             <span>Tableau</span>
             <span>•</span>
             <span>Power BI</span>
+            <span>•</span>
+            <span>Next.js</span>
+            <span>•</span>
+            <span>TypeScript</span>
             <!-- Duplicate for seamless loop -->
             <span>Web Design</span>
             <span>•</span>
@@ -788,6 +828,10 @@
             <span>Tableau</span>
             <span>•</span>
             <span>Power BI</span>
+            <span>•</span>
+            <span>Next.js</span>
+            <span>•</span>
+            <span>TypeScript</span>
         </div>
     </div>
 
@@ -803,7 +847,7 @@
                     I'm <span class="highlight-text">Dion Arifin</span>, a multidisciplinary creative developer based in Indonesia. With expertise spanning web design, development, and data analysis, I build digital solutions that are both beautiful and functional.
                 </p>
                 <p>
-                    My recent projects include <span class="highlight-text">Nails by DNNA</span> (a beauty booking platform), <span class="highlight-text">KNN Financial Planner</span> (an AI-powered financial tool), and <span class="highlight-text">DompetKu</span> (a personal finance dashboard).
+                    My recent projects include <span class="highlight-text">SinikitAanuin Agency</span> (a creative digital agency platform), <span class="highlight-text">Nails by DNNA</span> (a beauty booking platform), <span class="highlight-text">KNN Financial Planner</span> (an AI-powered financial tool), and <span class="highlight-text">DompetKu</span> (a personal finance dashboard).
                 </p>
                 <p>
                     I believe in creating work that not only looks great but drives real results through data-driven insights and user-centered design.
@@ -832,11 +876,10 @@
         <h2 class="section-title" style="margin-bottom: 3rem;">Let's Work Together</h2>
         <a href="mailto:juniordion7@gmail.com" class="contact-email">juniordion7@gmail.com</a>
         <div class="social-links">
-            <a href="https://github.com/arifin1301">GitHub</a>
-            <a href="https://www.linkedin.com/in/dionarifin13012003/">LinkedIn</a>
-            <a href="#">Dribbble</a>
-            <a href="#">Twitter</a>
-            <a href="https://www.instagram.com/arifindion__">Instagram</a>
+            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            <a href="#"><i class="fab fa-dribbble"></i> Dribbble</a>
+            <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
     </section>
 
@@ -938,7 +981,6 @@
 
             item.addEventListener('mouseleave', () => {
                 projectPreview.classList.remove('visible');
-                // Don't clear src immediately to allow smooth transition
                 setTimeout(() => {
                     if (!projectPreview.classList.contains('visible')) {
                         previewFrame.src = '';
@@ -1038,7 +1080,6 @@
             el.style.transition = 'all 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
             observer.observe(el);
             
-            // Trigger immediately if already visible
             if (el.getBoundingClientRect().top < window.innerHeight) {
                 setTimeout(() => {
                     el.style.opacity = '1';
